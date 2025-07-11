@@ -66,8 +66,11 @@ impl QueryHandler<GetUserMenusQuery, Vec<MenuInfo>> for GetUserMenusHandler {
         let get_user_query = GetCurrentUserQuery { token: query.token };
         let user_info = self.auth_service.get_current_user(get_user_query).await?;
 
-        let mut menu_permissions: Vec<crate::queries::auth::user_info::PermissionInfo> =
-            user_info.permissions.into_iter().filter(|p| p.type_ == "Menu").collect();
+        let mut menu_permissions: Vec<crate::queries::auth::user_info::PermissionInfo> = user_info
+            .permissions
+            .into_iter()
+            .filter(|p| p.type_.eq_ignore_ascii_case("menu") || p.type_ == "0")
+            .collect();
 
         menu_permissions.sort_by_key(|p| p.sort);
 

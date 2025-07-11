@@ -1,0 +1,15 @@
+[package]
+name = "tradewinds-application"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+tradewinds-domain = { path = "../tradewinds-domain" }
+tradewinds-common = { path = "../tradewinds-common" }
+tradewinds-error = { path = "../tradewinds-error" }
+
+serde = { version = "1.0", features = ["derive"] }
+async-trait = "0.1"
+serde_json = "1.0"
+chrono = "0.4"
+uuid = { version = "1.17.0", features = ["v4"] }

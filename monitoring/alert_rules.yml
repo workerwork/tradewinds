@@ -1,0 +1,77 @@
+groups:
+  - name: tradewinds
+    rules:
+      # 应用服务告警
+      - alert: ServiceDown
+        expr: up{job="tradewinds"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Tradewinds 服务宕机"
+          description: "Tradewinds 服务已经宕机超过1分钟"
+
+      - alert: HighResponseTime
+        expr: histogram_quantile(0.95, rate(http_request_duration_seconds_bucket{job="tradewinds"}[5m])) > 1
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "响应时间过高"
+          description: "95% 的请求响应时间超过1秒"
+
+      - alert: HighErrorRate
+        expr: rate(http_requests_total{job="tradewinds",status=~"5.."}[5m]) / rate(http_requests_total{job="tradewinds"}[5m]) > 0.1
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "错误率过高"
+          description: "5xx 错误率超过 10%"
+
+      # 系统资源告警
+      - alert: HighCPUUsage
+        expr: 100 - (avg by(instance) (irate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 80
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "CPU 使用率过高"
+          description: "CPU 使用率超过 80%"
+
+      - alert: HighMemoryUsage
+        expr: (1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)) * 100 > 80
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "内存使用率过高"
+          description: "内存使用率超过 80%"
+
+      - alert: DiskSpaceLow
+        expr: (1 - (node_filesystem_avail_bytes / node_filesystem_size_bytes)) * 100 > 90
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "磁盘空间不足"
+          description: "磁盘使用率超过 90%"
+
+      # 数据库告警
+      - alert: MySQLDown
+        expr: up{job="mysql"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "MySQL 服务宕机"
+          description: "MySQL 服务已经宕机超过1分钟"
+
+      - alert: RedisDown
+        expr: up{job="redis"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Redis 服务宕机"
+          description: "Redis 服务已经宕机超过1分钟"

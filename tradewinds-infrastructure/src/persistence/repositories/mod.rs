@@ -1,0 +1,21 @@
+pub mod sea_orm_permission_aggregate_repository;
+pub mod sea_orm_permission_repository;
+pub mod sea_orm_role_aggregate_repository;
+pub mod sea_orm_role_permission_repository;
+pub mod sea_orm_role_repository;
+pub mod sea_orm_token_blacklist_repository;
+pub mod sea_orm_user_aggregate_repository;
+pub mod sea_orm_user_repository;
+pub mod sea_orm_user_role_repository;
+pub mod sea_orm_system_setting_repository;
+
+pub use sea_orm_permission_aggregate_repository::*;
+pub use sea_orm_permission_repository::*;
+pub use sea_orm_role_aggregate_repository::*;
+pub use sea_orm_role_permission_repository::*;
+pub use sea_orm_role_repository::*;
+pub use sea_orm_token_blacklist_repository::*;
+pub use sea_orm_user_aggregate_repository::*;
+pub use sea_orm_user_repository::*;
+pub use sea_orm_user_role_repository::*;
+pub use sea_orm_system_setting_repository::*;

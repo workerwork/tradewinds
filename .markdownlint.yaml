@@ -1,0 +1,15 @@
+# Markdownlint 配置
+extends: default
+
+rules:
+  # 允许第一行不是标题（用于有前言的文档）
+  MD041: false
+
+  # 允许行长度超过80字符
+  MD013: false
+
+  # 允许内联 HTML
+  MD033: false
+
+  # 允许重复标题
+  MD024: false

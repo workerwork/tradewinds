@@ -1,0 +1,14 @@
+# 每行最大字符数，适度限制代码宽度，提升可读性  
+max_width = 120
+
+# tab 等价于 4 个空格，Rust 默认就是4
+tab_spaces = 4
+
+# 启用导入排序，方便管理 use 语句
+reorder_imports = true
+
+# 统一使用 Unix 风格换行符
+newline_style = "Unix"
+
+# 下面几个选项是 stable 支持的（也可以省略，因为它们是默认值）
+use_small_heuristics = "Max"

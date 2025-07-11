@@ -1,0 +1,55 @@
+[workspace]
+members = [
+    "tradewinds-api",
+    "tradewinds-application",
+    "tradewinds-common",
+    "tradewinds-domain",
+    "tradewinds-error",
+    "tradewinds-infrastructure",
+]
+
+[package]
+name = "tradewinds"
+version = "0.1.0"
+edition = "2024"
+authors = ["workerwork <workerwork@qq.com>"]
+description = "A DDD-based backend service"
+default-run = "tradewinds"
+
+[[bin]]
+name = "migrate"
+path = "src/bin/migrate.rs"
+
+[[bin]]
+name = "hash_password"
+path = "src/bin/hash_password.rs"
+
+[[bin]]
+name = "create_user"
+path = "src/bin/test_timestamp.rs"
+
+[[bin]]
+name = "tradewinds"
+path = "src/main.rs"
+
+
+[features]
+default = []
+events = []
+
+
+[dependencies]
+tradewinds-error = { path = "tradewinds-error" }
+tradewinds-common = { path = "tradewinds-common" }
+tradewinds-api = { path = "tradewinds-api" }
+tradewinds-application = { path = "tradewinds-application" }
+tradewinds-domain = { path = "tradewinds-domain" }
+tradewinds-infrastructure = { path = "tradewinds-infrastructure" }
+
+tokio = { version = "1.0", features = ["full"] }
+axum = { version = "0.8.4", features = ["macros"] }
+tracing = "0.1"
+dotenv = "0.15"
+bcrypt = "0.17.0"
+sea-orm-migration = "1.1.12"
+chrono = "0.4"

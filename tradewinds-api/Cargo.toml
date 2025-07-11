@@ -1,0 +1,52 @@
+[package]
+name = "tradewinds-api"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+tradewinds-common = { path = "../tradewinds-common" }
+tradewinds-error = { path = "../tradewinds-error" }
+tradewinds-application = { path = "../tradewinds-application" }
+tradewinds-domain = { path = "../tradewinds-domain" }
+
+# Web 框架相关
+axum = "0.8.4" # Web 框架
+
+# 序列化/反序列化
+serde = { version = "1", features = ["derive"] } # 序列化/反序列化
+serde_json = "1"                                 # JSON 处理
+
+# 异步/并发
+tokio = { version = "1", features = ["full"] } # 异步运行时
+async-trait = "0.1"                            # 异步trait支持
+
+# 加密/安全
+bcrypt = "0.17.0" # 密码加密
+
+# 数据库/ORM
+sea-orm = { version = "1.1.12", features = [
+    "sqlx-mysql",               # MySQL 支持
+    "runtime-tokio-native-tls", # Tokio运行时+TLS
+] } # ORM 框架
+redis = { version = "0.32.2", features = ["tokio-comp"] } # Redis 客户端
+
+# 错误处理/工具
+thiserror = "2.0.12" # 错误处理宏
+anyhow = "1.0.98"    # 通用错误处理
+
+# 日志/追踪
+tracing = "0.1.41" # 日志与追踪
+
+# HTTP/网络
+http-body = "1"          # HTTP body 处理
+bytes = "1"              # 字节缓冲区
+pin-project-lite = "0.2" # Pin 工具
+
+# 校验/验证
+validator = { version = "0.20", features = ["derive"] } # 数据校验
+
+# 时间/日期
+chrono = { version = "0.4", features = ["serde"] } # 日期时间处理
+
+# UUID
+uuid = { version = "1", features = ["v4"] } # 唯一ID生成
